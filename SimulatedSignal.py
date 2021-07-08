@@ -3,7 +3,7 @@ from threading import Timer, Event
 
 class SimulatedSignal:
     
-    def __init__(self, sample_rate = 40, cycle_duration = 1.25, autostart=True):
+    def __init__(self, sample_rate = 40, cycle_duration = 2.0, autostart=True):
         self.sample_rate = sample_rate
         self.cycle_duration = cycle_duration # seconds
         self.elapsed_time: float = 0.0
@@ -25,11 +25,7 @@ class SimulatedSignal:
     def calculate_current_datapoint(self):
         # loops a simple sine function
         if not self.timer_completed.is_set():
-            if self.elapsed_time > self.cycle_duration:
-                # self.elapsed_time = 0.0
-                pass
-            
-            value = np.sin(self.elapsed_time * (self.cycle_duration * (2 * np.pi)))
+            value = np.sin(self.elapsed_time * (1/self.cycle_duration * (2 * np.pi)))
             if value < 0:
                 value = 0
             self.elapsed_time += 1.0/self.sample_rate

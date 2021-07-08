@@ -28,7 +28,7 @@ if __name__ == '__main__':
     arduino = ArduinoService()
     
     # start matplotlib object
-    grapher = Grapher(data=buffer, sample_rate=1.0/arduino.simulator.sample_rate)
+    grapher = Grapher(data=buffer, sample_rate = arduino.simulator.sample_rate)
     
     def add_value_to_buffer():
         buffer.append(arduino.read())

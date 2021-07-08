@@ -8,7 +8,6 @@ Arduino Service manages the serial reading from Arduino.
 import serial
 from SimulatedSignal import SimulatedSignal
 
-
 class ArduinoService:
     
     def __init__(self, port='COM4', baudrate=115200):
