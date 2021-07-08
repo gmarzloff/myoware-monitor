@@ -17,6 +17,7 @@ class Grapher:
         print("running graph")
         self.plotting_data, = self.ax.plot(0, self.data[0])
         self.anim = FuncAnimation(fig=self.fig, func=self.update_graph, interval=1000*1.0/self.sample_rate, blit=True)
+        self.x_values = np.arange(1, len(self.data)+1) / self.sample_rate
         plt.show()
         
     def update_graph(self, i):
@@ -24,14 +25,13 @@ class Grapher:
         self.ax.cla()
         
         # plot the buffer
-        x_values = np.arange(1, len(self.data)+1) / self.sample_rate
-        self.ax.plot(x_values, self.data)
+        # x_values = np.arange(1, len(self.data)+1) / self.sample_rate
+        self.ax.plot(self.x_values, self.data)
 
         # add attributes to axes
         self.ax.set_xlabel('time (s)')
         self.ax.set_ylabel('signal')
-        self.ax.set_ylim(-0.25, 1.0)
-        self.ax.set_xlim(0, (len(self.data)+1)/self.sample_rate)
+        self.ax.set_xlim(0, self.x_values[-1])
         self.ax.set_title('Myoware Monitor')
         self.ax.grid()
         

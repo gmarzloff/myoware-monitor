@@ -2,7 +2,7 @@
 from ArduinoService import ArduinoService
 import numpy as np
 import collections
-from threading import Timer, Event
+from threading import Timer
 from Grapher import Grapher
 
 '''
