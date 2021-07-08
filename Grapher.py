@@ -25,7 +25,6 @@ class Grapher:
         self.ax.cla()
         
         # plot the buffer
-        # x_values = np.arange(1, len(self.data)+1) / self.sample_rate
         self.ax.plot(self.x_values, self.data)
 
         # add attributes to axes
