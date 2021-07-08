@@ -23,21 +23,21 @@ if __name__ == '__main__':
     
     max_samples_on_graph = 200
     buffer = collections.deque(np.zeros(max_samples_on_graph))
-    threshold = 0.5 # what values count as a contraction
     
     # start the Arduino Live/Simulated interface
     arduino = ArduinoService()
+    contraction_threshold = 0.5 if arduino.simulator.isRunning else 500
     
     # start matplotlib object
     grapher = Grapher(data=buffer,
                       sample_rate = arduino.simulator.sample_rate,
-                      threshold=threshold)
+                      threshold=contraction_threshold)
     
     def add_value_to_buffer():
         new_value = arduino.read()
         buffer.append(new_value)
         buffer.popleft()
-        grapher.meetsThreshold = True if new_value >= threshold else False
+        grapher.meetsThreshold = True if new_value >= contraction_threshold else False
         grapher.update_data(buffer)
         
         Timer(1.0/arduino.simulator.sample_rate, add_value_to_buffer).start()
