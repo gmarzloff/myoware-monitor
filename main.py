@@ -30,7 +30,7 @@ if __name__ == '__main__':
     
     # start matplotlib object
     grapher = Grapher(data=buffer,
-                      sample_rate = arduino.simulator.sample_rate,
+                      sample_rate = arduino.sample_rate,
                       threshold=contraction_threshold)
     
     def add_value_to_buffer():
@@ -40,9 +40,9 @@ if __name__ == '__main__':
         grapher.meetsThreshold = True if new_value >= contraction_threshold else False
         grapher.update_data(buffer)
         
-        Timer(1.0/arduino.simulator.sample_rate, add_value_to_buffer).start()
+        Timer(1.0/arduino.sample_rate, add_value_to_buffer).start()
         
     # loop the buffer update
-    Timer(1.0/arduino.simulator.sample_rate, add_value_to_buffer).start()
+    Timer(1.0/arduino.sample_rate, add_value_to_buffer).start()
     
     grapher.run()
